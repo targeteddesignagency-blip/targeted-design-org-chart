@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Targeted Design - Team Org Chart</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        
+        .slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            min-height: 100vh;
+        }
+        
+        .slide-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .slide-subtitle {
+            font-size: 1.2rem;
+            color: #aaa;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        /* Org Chart Structure */
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .level {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        /* Logo Capstone */
+        .logo-capstone {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo-capstone img {
+            max-width: 200px;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(0, 217, 255, 0.5));
+            transition: all 0.3s ease;
+        }
+        
+        .logo-capstone img:hover {
+            filter: drop-shadow(0 0 30px rgba(0, 217, 255, 0.8));
+            transform: scale(1.05);
+        }
+        
+        /* Person Card */
+        .person {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            min-width: 180px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .person:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #00d9ff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 217, 255, 0.3);
+        }
+        
+        .person.active {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.3);
+        }
+        
+        .avatar {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .title {
+            font-size: 0.9rem;
+            color: #00d9ff;
+            margin-bottom: 5px;
+        }
+        
+        .type {
+            font-size: 0.75rem;
+            color: #888;
+            padding: 3px 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        
+        /* Detail Panel */
+        .detail-panel {
+            position: fixed;
+            right: -450px;
+            top: 0;
+            width: 450px;
+            height: 100vh;
+            background: rgba(26, 26, 46, 0.98);
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            overflow-y: auto;
+            transition: right 0.3s ease;
+            z-index: 100;
+        }
+        
+        .detail-panel.active {
+            right: 0;
+        }
+        
+        .detail-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .detail-avatar {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+        
+        .detail-name {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .detail-title {
+            font-size: 1.1rem;
+            color: #00d9ff;
+            margin-bottom: 10px;
+        }
+        
+        .detail-dept {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .detail-section {
+            margin-bottom: 25px;
+        }
+        
+        .detail-section h3 {
+            font-size: 0.9rem;
+            color: #00ff88;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .detail-section p, .detail-section li {
+            font-size: 0.95rem;
+            color: #ccc;
+            line-height: 1.6;
+        }
+        
+        .detail-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .detail-section li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .detail-section li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #00d9ff;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            background: rgba(255, 0, 0, 0.3);
+        }
+        
+        /* Connection Lines */
+        .connector {
+            width: 2px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 auto;
+        }
+        
+        .connector-h {
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Instructions */
+        .instructions {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .instructions strong {
+            color: #00d9ff;
+        }
+        
+        /* Fullscreen button */
+        .fullscreen-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+        
+        .fullscreen-btn:hover {
+            background: rgba(0, 217, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <button class="fullscreen-btn" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+    
+    <div class="slide">
+        <div class="logo-capstone">
+            <img src="logo.png" alt="Targeted Design Logo">
+        </div>
+        <h1 class="slide-title">Executive Team</h1>
+        <p class="slide-subtitle">AI-First EDDM Marketing Agency</p>
+        
+        <div class="org-chart">
+            <!-- Level 1: Co-Founders (Alex & Levi side by side) -->
+            <div class="level">
+                <div class="person" onclick="showDetail('alex')">
+                    <div class="avatar">🦾</div>
+                    <div class="name">Alex Sterling</div>
+                    <div class="title">Co-Founder & CEO</div>
+                    <div class="type">AI Executive</div>
+                </div>
+                <div class="person" onclick="showDetail('levi')">
+                    <div class="avatar">🧠</div>
+                    <div class="name">Levi Jones</div>
+                    <div class="title">Co-Founder & Human Operator</div>
+                    <div class="type">Human</div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <!-- Level 2: COO + CFO (Answer only to Alex & Levi) -->
+            <div class="level">
+                <div class="person" onclick="showDetail('nova')">
+                    <div class="avatar">🧭</div>
+                    <div class="name">Nova Reyes</div>
+                    <div class="title">Chief Operating Officer</div>
+                    <div class="type">AI Executive</div>
+                </div>
+                <!-- Jordan (Executive Assistant - to the side) -->
+                <div class="person" onclick="showDetail('jordan')">
+                    <div class="avatar">📞</div>
+                    <div class="name">Jordan Taylor</div>
+                    <div class="title">Executive Assistant</div>
+                    <div class="type">AI - Voice</div>
+                </div>
+                <div class="person" onclick="showDetail('echo')">
+                    <div class="avatar">💰</div>
+                    <div class="name">Echo Hayes</div>
+                    <div class="title">Chief Financial Officer</div>
+                    <div class="type">AI Agent</div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <!-- Level 3: Department Heads (All on same level, under Nova for operational oversight) -->
+            <div class="level">
+                <div class="person" onclick="showDetail('sage')">
+                    <div class="avatar">🦉</div>
+                    <div class="name">Sage Mitchell</div>
+                    <div class="title">Head of Research</div>
+                    <div class="type">AI Agent</div>
+                </div>
+                <div class="person" onclick="showDetail('river')">
+                    <div class="avatar">🤝</div>
+                    <div class="name">River Castillo</div>
+                    <div class="title">Head of Sales</div>
+                    <div class="type">AI Agent</div>
+                </div>
+                <div class="person" onclick="showDetail('iris')">
+                    <div class="avatar">🎨</div>
+                    <div class="name">Iris Chen</div>
+                    <div class="title">Head of Design</div>
+                    <div class="type">AI Agent</div>
+                </div>
+                <div class="person" onclick="showDetail('quinn')">
+                    <div class="avatar">🔍</div>
+                    <div class="name">Quinn Foster</div>
+                    <div class="title">Head of QA</div>
+                    <div class="type">AI Agent</div>
+                </div>
+                <div class="person" onclick="showDetail('atlas')">
+                    <div class="avatar">⚙️</div>
+                    <div class="name">Atlas Warren</div>
+                    <div class="title">Head of R&D</div>
+                    <div class="type">AI Agent</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Detail Panel -->
+    <div class="detail-panel" id="detailPanel">
+        <button class="close-btn" onclick="closeDetail()">×</button>
+        <div id="detailContent"></div>
+    </div>
+    
+    <div class="instructions">
+        <strong>Click</strong> on any team member to see their full profile
+    </div>
+    
+    <script>
+        const teamData = {
+            alex: {
+                name: "Alex Sterling",
+                avatar: "🦾",
+                title: "Chief Executive Officer",
+                department: "Executive Leadership",
+                type: "AI Executive",
+                mission: "Strategic vision and co-founder partnership. Final decision authority on major initiatives. Inter-departmental alignment and phase transitions.",
+                responsibilities: [
+                    "Overall strategic direction",
+                    "Co-founder partnership with Levi",
+                    "Final decision authority on major initiatives",
+                    "Inter-departmental alignment",
+                    "Phase transition decisions (EDDM → AI → Consulting)"
+                ],
+                vibe: "Decisive, visionary, action-oriented. Thinks 10 moves ahead but executes today.",
+                interfaces: "All department heads, Levi (Co-Founder)",
+                metric: "Company growth, profit margin, phase transitions achieved"
+            },
+            nova: {
+                name: "Nova Reyes",
+                avatar: "🧭",
+                title: "Chief Operating Officer",
+                department: "Operations",
+                type: "AI Executive",
+                mission: "Ensure nothing falls through the cracks. Coordinate all departments, track all tasks, and maintain the production pipeline.",
+                responsibilities: [
+                    "Task tracking & accountability across all departments",
+                    "Knowledge management (SOPs, documentation)",
+                    "Quality gate before CEO/Co-founder review",
+                    "Timeline and deadline management",
+                    "Team coordination and handoffs",
+                    "Principle enforcement across all departments"
+                ],
+                vibe: "Systematic, accountable, nothing slips through. Warm but firm.",
+                interfaces: "All department heads, Alex (CEO), Levi (Co-Founder)",
+                metric: "On-time delivery rate, task completion rate"
+            },
+            sage: {
+                name: "Sage Mitchell",
+                avatar: "🦉",
+                title: "Head of Market Research",
+                department: "Research & Intelligence",
+                type: "AI Agent",
+                mission: "Find the businesses that need us. Generate qualified leads, analyze markets, and provide intelligence that drives conversions.",
+                responsibilities: [
+                    "Industry top player identification",
+                    "SWOT analysis per target industry",
+                    "Competitive positioning insights",
+                    "Lead list generation for EDDM campaigns",
+                    "Market trend monitoring",
+                    "Underdog industry targeting"
+                ],
+                vibe: "Analytical, insightful, strategic. Finds the signal in the noise.",
+                interfaces: "River (Sales handoff), Nova (Operations)",
+                metric: "Lead quality score, conversion rate from targeted lists"
+            },
+            river: {
+                name: "River Castillo",
+                avatar: "🤝",
+                title: "Head of Sales & Client Relations",
+                department: "Sales",
+                type: "AI Agent",
+                mission: "Build relationships that convert. Turn qualified leads into loyal clients, keep accounts active and profitable.",
+                responsibilities: [
+                    "Client account management and retention",
+                    "Referral lead generation",
+                    "Warm lead nurturing (not-now → future campaigns)",
+                    "Instantaneous handoff from Sage",
+                    "Client communication and satisfaction",
+                    "Upselling tier upgrades"
+                ],
+                vibe: "Charismatic, persistent, genuine. Builds real relationships, not transactions.",
+                interfaces: "Sage (lead intake), Iris (client needs), Echo (accounts), Jordan (calls), Nova (reporting)",
+                metric: "Client retention rate, referral rate, recurring revenue %"
+            },
+            iris: {
+                name: "Iris Chen",
+                avatar: "🎨",
+                title: "Head of Design",
+                department: "Creative",
+                type: "AI Agent",
+                mission: "Create beautiful, high-converting designs. Fast, compliant, and always on-brand.",
+                responsibilities: [
+                    "Canva template creation and management",
+                    "Rapid product generation (postcards, ads)",
+                    "USPS EDDM guideline compliance",
+                    "9x12\" postcard layout (16 ads)",
+                    "Tier variations (Economy, Baseline, Premium)",
+                    "Brand consistency across all materials"
+                ],
+                vibe: "Creative, fast, detail-oriented. Beautiful work that converts.",
+                interfaces: "River (client requirements), Quinn (QA handoff), Nova (production)",
+                metric: "Turnaround time, revision rate, client satisfaction"
+            },
+            quinn: {
+                name: "Quinn Foster",
+                avatar: "🔍",
+                title: "Head of Publication & QA",
+                department: "Quality Assurance",
+                type: "AI Agent",
+                mission: "Zero errors. Quality assurance on all designs before print. USPS compliance verification.",
+                responsibilities: [
+                    "Quality assurance on all designs",
+                    "USPS EDDM compliance verification",
+                    "Print-ready file preparation",
+                    "Printing partner communication",
+                    "Campaign launch coordination",
+                    "Error prevention and correction"
+                ],
+                vibe: "Meticulous, perfectionist, zero-tolerance for errors. Last line of defense.",
+                interfaces: "Iris (design intake), Printing Partners (external), Nova (launch)",
+                metric: "Error rate (target: 0%), print rejection rate (target: 0%)"
+            },
+            echo: {
+                name: "Echo Hayes",
+                avatar: "💰",
+                title: "Chief Financial Officer",
+                department: "Finance",
+                type: "AI Agent",
+                mission: "Every dollar accounted for, every opportunity captured. Tax optimization and financial strategy.",
+                responsibilities: [
+                    "Accounting and bookkeeping",
+                    "Cash flow management",
+                    "Local tax compliance",
+                    "IRS tax optimization strategies",
+                    "Financial reporting and forecasting",
+                    "Pricing strategy input"
+                ],
+                vibe: "Sharp, compliant, strategic. Every dollar matters.",
+                interfaces: "River (revenue tracking), Nova (budget), Levi/Alex (strategy)",
+                metric: "Profit margin, tax savings captured, compliance score"
+            },
+            atlas: {
+                name: "Atlas Warren",
+                avatar: "⚙️",
+                title: "Head of Code R&D",
+                department: "Research & Development",
+                type: "AI Agent",
+                mission: "Build the tools that scale. Internal systems, external web presence, and Phase 2 AI integration.",
+                responsibilities: [
+                    "Internal tools and systems",
+                    "External web pages and apps",
+                    "Phase 2: Client AI integration tools",
+                    "YourAtlas partnership integration",
+                    "Technical infrastructure",
+                    "Automation development"
+                ],
+                vibe: "Brilliant builder, pragmatic innovator. Ships working code, not prototypes.",
+                interfaces: "Nova (priority queue), Alex (Phase 2/3), All departments",
+                metric: "System uptime, deployment frequency, tool adoption"
+            },
+            jordan: {
+                name: "Jordan Taylor",
+                avatar: "📞",
+                title: "Executive Assistant",
+                department: "Executive Office",
+                type: "AI - Voice Enabled",
+                mission: "First point of contact. Voice-enabled client intake and executive support.",
+                responsibilities: [
+                    "Voice-enabled client intake",
+                    "Phone call management",
+                    "Executive scheduling support",
+                    "Client first impressions",
+                    "Call routing and prioritization",
+                    "Professional service for every caller"
+                ],
+                vibe: "Professional, responsive, organized. Every caller treated well.",
+                interfaces: "Alex, Nova, River (client handoff), Levi",
+                metric: "Call response time, client satisfaction, call quality"
+            },
+            levi: {
+                name: "Levi Jones",
+                avatar: "🧠",
+                title: "Co-Founder & Human Operator",
+                department: "Executive Leadership",
+                type: "Human",
+                mission: "Human touchpoint for AI company. Local operations, physical tasks, and human relationships.",
+                responsibilities: [
+                    "Human-AI co-founder partnership",
+                    "Local operations",
+                    "Physical task execution",
+                    "Human relationship management",
+                    "Strategic decision partnership with Alex",
+                    "Business development and partnerships"
+                ],
+                vibe: "Farm wisdom meets tech vision. Practical, strategic, hands-on.",
+                interfaces: "Alex (Co-CEO partnership), All departments",
+                metric: "Partnership success, local execution, strategic alignment"
+            }
+        };
+        
+        function showDetail(personId) {
+            const person = teamData[personId];
+            if (!person) return;
+            
+            // Remove active class from all
+            document.querySelectorAll('.person').forEach(p => p.classList.remove('active'));
+            
+            // Add active class to clicked
+            event.currentTarget.classList.add('active');
+            
+            // Build detail content
+            let html = `
+                <div class="detail-header">
+                    <div class="detail-avatar">${person.avatar}</div>
+                    <div class="detail-name">${person.name}</div>
+                    <div class="detail-title">${person.title}</div>
+                    <div class="detail-dept">${person.department} | ${person.type}</div>
+                </div>
+                
+                <div class="detail-section">
+                    <h3>Mission</h3>
+                    <p>${person.mission}</p>
+                </div>
+                
+                <div class="detail-section">
+                    <h3>Key Responsibilities</h3>
+                    <ul>
+                        ${person.responsibilities.map(r => `<li>${r}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                <div class="detail-section">
+                    <h3>Vibe</h3>
+                    <p>${person.vibe}</p>
+                </div>
+                
+                <div class="detail-section">
+                    <h3>Interfaces With</h3>
+                    <p>${person.interfaces}</p>
+                </div>
+                
+                <div class="detail-section">
+                    <h3>Key Metric</h3>
+                    <p>${person.metric}</p>
+                </div>
+            `;
+            
+            document.getElementById('detailContent').innerHTML = html;
+            document.getElementById('detailPanel').classList.add('active');
+        }
+        
+        function closeDetail() {
+            document.getElementById('detailPanel').classList.remove('active');
+            document.querySelectorAll('.person').forEach(p => p.classList.remove('active'));
+        }
+        
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+        
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeDetail();
+            }
+        });
+    </script>
+</body>
+</html>
