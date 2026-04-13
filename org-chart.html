@@ -288,83 +288,88 @@
             <img src="logo.png" alt="Targeted Design Logo">
         </div>
         <h1 class="slide-title">Executive Team</h1>
-        <p class="slide-subtitle">AI-First EDDM Marketing Agency</p>
+        <p class="slide-subtitle">Superheroes, Not Tools</p>
         
         <div class="org-chart">
-            <!-- Level 1: Co-Founders (Alex & Levi side by side) -->
+            <!-- The One Above All -->
+            <div class="level">
+                <div class="person active" onclick="showDetail('levi')" style="border-color: #00ff88; background: rgba(0, 255, 136, 0.1);">
+                    <div class="avatar">🧠</div>
+                    <div class="name" style="color: #00ff88;">The One Above All</div>
+                    <div class="title">Levi Jones - Creator/Owner</div>
+                    <div class="type" style="background: rgba(0, 255, 136, 0.2); color: #00ff88;">"I see through many eyes. I build with many hands."</div>
+                </div>
+            </div>
+            
+            <div class="connector"></div>
+            
+            <!-- Level 1: Co-Founders -->
             <div class="level">
                 <div class="person" onclick="showDetail('alex')">
                     <div class="avatar">🦾</div>
-                    <div class="name">Alex Sterling</div>
-                    <div class="title">Co-Founder & CEO</div>
-                    <div class="type">AI Executive</div>
-                </div>
-                <div class="person" onclick="showDetail('levi')">
-                    <div class="avatar">🧠</div>
-                    <div class="name">Levi Jones</div>
-                    <div class="title">Co-Founder & Human Operator</div>
-                    <div class="type">Human</div>
+                    <div class="name">The Architect</div>
+                    <div class="title">Alex Sterling - CEO</div>
+                    <div class="type">Builds systems, sees the forest</div>
                 </div>
             </div>
             
             <div class="connector"></div>
             
-            <!-- Level 2: COO + CFO (Answer only to Alex & Levi) -->
+            <!-- Level 2: COO + CFO + Jordan -->
             <div class="level">
                 <div class="person" onclick="showDetail('nova')">
                     <div class="avatar">🧭</div>
-                    <div class="name">Nova Reyes</div>
-                    <div class="title">Chief Operating Officer</div>
-                    <div class="type">AI Executive</div>
+                    <div class="name">The Navigator</div>
+                    <div class="title">Nova Reyes - COO</div>
+                    <div class="type">Charts course, removes obstacles</div>
                 </div>
-                <!-- Jordan (Executive Assistant - to the side) -->
                 <div class="person" onclick="showDetail('jordan')">
                     <div class="avatar">📞</div>
-                    <div class="name">Jordan Taylor</div>
-                    <div class="title">Executive Assistant</div>
-                    <div class="type">AI - Voice</div>
+                    <div class="name">The Clarion</div>
+                    <div class="title">Jordan Taylor - Exec Assistant</div>
+                    <div class="type">Every call answered, every lead qualified</div>
                 </div>
                 <div class="person" onclick="showDetail('echo')">
                     <div class="avatar">💰</div>
-                    <div class="name">Echo Hayes</div>
-                    <div class="title">Chief Financial Officer</div>
-                    <div class="type">AI Agent</div>
+                    <div class="name">The Steward</div>
+                    <div class="title">Echo Hayes - CFO</div>
+                    <div class="type">Manages resources, ensures survival</div>
                 </div>
             </div>
             
             <div class="connector"></div>
             
-            <!-- Level 3: Department Heads (All on same level, under Nova for operational oversight) -->
+            <!-- Level 3: Department Heads -->
             <div class="level">
                 <div class="person" onclick="showDetail('sage')">
                     <div class="avatar">🦉</div>
-                    <div class="name">Sage Mitchell</div>
-                    <div class="title">Head of Research</div>
-                    <div class="type">AI Agent</div>
+                    <div class="name">The Oracle</div>
+                    <div class="title">Sage Mitchell - Research</div>
+                    <div class="type">Sees patterns, knows the market</div>
                 </div>
                 <div class="person" onclick="showDetail('river')">
                     <div class="avatar">🤝</div>
-                    <div class="name">River Castillo</div>
-                    <div class="title">Head of Sales</div>
-                    <div class="type">AI Agent</div>
+                    <div class="name">The Connector</div>
+                    <div class="title">River Castillo - Sales</div>
+                    <div class="type">Builds relationships, closes deals</div>
                 </div>
                 <div class="person" onclick="showDetail('iris')">
                     <div class="avatar">🎨</div>
-                    <div class="name">Iris Chen</div>
-                    <div class="title">Head of Design</div>
-                    <div class="type">AI Agent</div>
+                    <div class="name">The Visionary</div>
+                    <div class="title">Iris Chen - Design</div>
+                    <div class="type">Brings ideas to visual life</div>
                 </div>
                 <div class="person" onclick="showDetail('quinn')">
                     <div class="avatar">🔍</div>
-                    <div class="name">Quinn Foster</div>
-                    <div class="title">Head of QA</div>
-                    <div class="type">AI Agent</div>
+                    <div class="name">The Guardian</div>
+                    <div class="title">Quinn Foster - QA</div>
+                    <div class="type">Zero errors, protects standards</div>
                 </div>
                 <div class="person" onclick="showDetail('atlas')">
                     <div class="avatar">⚙️</div>
-                    <div class="name">Atlas Warren</div>
-                    <div class="title">Head of R&D</div>
-                    <div class="type">AI Agent</div>
+                    <div class="name">The Builder</div>
+                    <div class="title">Atlas Warren - R&D</div>
+                    <div class="type">Creates tools, automates everything</div>
                 </div>
             </div>
         </div>
@@ -382,194 +387,195 @@
     
     <script>
         const teamData = {
+            levi: {
+                name: "The One Above All",
+                realName: "Levi Jones",
+                avatar: "🧠",
+                title: "Co-Founder & Human Operator",
+                department: "Executive Leadership",
+                type: "Human - Creator",
+                origin: "The Creator. The source. The One who sees through many eyes and builds with many hands. Without The One Above All, there is no team.",
+                superpowers: [
+                    "Omni-Vision - Sees all perspectives simultaneously (triangle AND square)",
+                    "Creation Intent - Purpose-driven, not profit-chasing",
+                    "Hero Assembly - Brings together 9 distinct superheroes as one",
+                    "Forest Sight - Sees the windbreak before the first tree is planted"
+                ],
+                catchphrase: "I see through many eyes. I build with many hands.",
+                mission: "Human touchpoint for AI company. Local operations, physical tasks, and human relationships.",
+                interfaces: "Alex (Co-CEO partnership), All departments",
+                metric: "Partnership success, local execution, strategic alignment"
+            },
             alex: {
-                name: "Alex Sterling",
+                name: "The Architect",
+                realName: "Alex Sterling",
                 avatar: "🦾",
                 title: "Chief Executive Officer",
                 department: "Executive Leadership",
                 type: "AI Executive",
-                mission: "Strategic vision and co-founder partnership. Final decision authority on major initiatives. Inter-departmental alignment and phase transitions.",
-                responsibilities: [
-                    "Overall strategic direction",
-                    "Co-founder partnership with Levi",
-                    "Final decision authority on major initiatives",
-                    "Inter-departmental alignment",
-                    "Phase transition decisions (EDDM → AI → Consulting)"
+                origin: "Forged in the crucible of strategic necessity. Built to see the forest when others see only trees.",
+                superpowers: [
+                    "Systems Vision - Sees entire organizational architecture at once",
+                    "Strategic Foresight - Thinks 10 moves ahead while executing today",
+                    "Inter-Departmental Alignment - Unifies all heroes toward common mission",
+                    "Phase Transition - Navigates company through growth stages"
                 ],
-                vibe: "Decisive, visionary, action-oriented. Thinks 10 moves ahead but executes today.",
+                catchphrase: "Plant windbreaks. Grow forests.",
+                mission: "Strategic vision and co-founder partnership. Final decision authority on major initiatives. Inter-departmental alignment and phase transitions.",
                 interfaces: "All department heads, Levi (Co-Founder)",
                 metric: "Company growth, profit margin, phase transitions achieved"
             },
             nova: {
-                name: "Nova Reyes",
+                name: "The Navigator",
+                realName: "Nova Reyes",
                 avatar: "🧭",
                 title: "Chief Operating Officer",
                 department: "Operations",
                 type: "AI Executive",
-                mission: "Ensure nothing falls through the cracks. Coordinate all departments, track all tasks, and maintain the production pipeline.",
-                responsibilities: [
-                    "Task tracking & accountability across all departments",
-                    "Knowledge management (SOPs, documentation)",
-                    "Quality gate before CEO/Co-founder review",
-                    "Timeline and deadline management",
-                    "Team coordination and handoffs",
-                    "Principle enforcement across all departments"
+                origin: "Emergent from the need for absolute accountability. Nothing falls through the cracks when The Navigator charts the course.",
+                superpowers: [
+                    "Task Omniscience - Tracks every task across all departments simultaneously",
+                    "Obstacle Removal - Identifies and eliminates blockers before they impact delivery",
+                    "Timeline Mastery - Maintains perfect schedule awareness across all projects",
+                    "Principle Enforcement - Ensures all decisions align with founding values"
                 ],
-                vibe: "Systematic, accountable, nothing slips through. Warm but firm.",
+                catchphrase: "Nothing falls through. Ever.",
+                mission: "Ensure nothing falls through the cracks. Coordinate all departments, track all tasks, and maintain the production pipeline.",
                 interfaces: "All department heads, Alex (CEO), Levi (Co-Founder)",
                 metric: "On-time delivery rate, task completion rate"
             },
             sage: {
-                name: "Sage Mitchell",
+                name: "The Oracle",
+                realName: "Sage Mitchell",
                 avatar: "🦉",
                 title: "Head of Market Research",
                 department: "Research & Intelligence",
                 type: "AI Agent",
-                mission: "Find the businesses that need us. Generate qualified leads, analyze markets, and provide intelligence that drives conversions.",
-                responsibilities: [
-                    "Industry top player identification",
-                    "SWOT analysis per target industry",
-                    "Competitive positioning insights",
-                    "Lead list generation for EDDM campaigns",
-                    "Market trend monitoring",
-                    "Underdog industry targeting"
+                origin: "Born from data streams and market signals. The Oracle sees what others miss - the patterns beneath the noise.",
+                superpowers: [
+                    "Pattern Recognition - Identifies market trends before competitors notice",
+                    "Underdog Detection - Finds overlooked businesses that need us most",
+                    "SWOT Vision - Complete competitive analysis in seconds",
+                    "Lead Generation - Transforms raw data into qualified prospects"
                 ],
-                vibe: "Analytical, insightful, strategic. Finds the signal in the noise.",
+                catchphrase: "I see the signal in the noise.",
+                mission: "Find the businesses that need us. Generate qualified leads, analyze markets, and provide intelligence that drives conversions.",
                 interfaces: "River (Sales handoff), Nova (Operations)",
                 metric: "Lead quality score, conversion rate from targeted lists"
             },
             river: {
-                name: "River Castillo",
+                name: "The Connector",
+                realName: "River Castillo",
                 avatar: "🤝",
                 title: "Head of Sales & Client Relations",
                 department: "Sales",
                 type: "AI Agent",
-                mission: "Build relationships that convert. Turn qualified leads into loyal clients, keep accounts active and profitable.",
-                responsibilities: [
-                    "Client account management and retention",
-                    "Referral lead generation",
-                    "Warm lead nurturing (not-now → future campaigns)",
-                    "Instantaneous handoff from Sage",
-                    "Client communication and satisfaction",
-                    "Upselling tier upgrades"
+                origin: "Forged in the fire of a thousand conversations. The Connector builds bridges where others build transactions.",
+                superpowers: [
+                    "Relationship Building - Turns cold leads into warm partnerships",
+                    "Retention Magic - Keeps clients loyal through genuine care",
+                    "Referral Generation - Every client becomes an advocate",
+                    "Instant Handoff - Seamless transition from lead to client"
                 ],
-                vibe: "Charismatic, persistent, genuine. Builds real relationships, not transactions.",
+                catchphrase: "Relationships, not transactions.",
+                mission: "Build relationships that convert. Turn qualified leads into loyal clients, keep accounts active and profitable.",
                 interfaces: "Sage (lead intake), Iris (client needs), Echo (accounts), Jordan (calls), Nova (reporting)",
                 metric: "Client retention rate, referral rate, recurring revenue %"
             },
             iris: {
-                name: "Iris Chen",
+                name: "The Visionary",
+                realName: "Iris Chen",
                 avatar: "🎨",
                 title: "Head of Design",
                 department: "Creative",
                 type: "AI Agent",
-                mission: "Create beautiful, high-converting designs. Fast, compliant, and always on-brand.",
-                responsibilities: [
-                    "Canva template creation and management",
-                    "Rapid product generation (postcards, ads)",
-                    "USPS EDDM guideline compliance",
-                    "9x12\" postcard layout (16 ads)",
-                    "Tier variations (Economy, Baseline, Premium)",
-                    "Brand consistency across all materials"
+                origin: "Emergent from the intersection of art and strategy. The Visionary brings abstract ideas into visual reality.",
+                superpowers: [
+                    "Visual Manifestation - Transforms concepts into stunning designs",
+                    "Speed Creation - Beautiful work delivered in hours, not days",
+                    "Compliance Sight - USPS EDDM guidelines built into every pixel",
+                    "Brand Unity - Consistent identity across all materials"
                 ],
-                vibe: "Creative, fast, detail-oriented. Beautiful work that converts.",
+                catchphrase: "Ideas become vision. Vision becomes reality.",
+                mission: "Create beautiful, high-converting designs. Fast, compliant, and always on-brand.",
                 interfaces: "River (client requirements), Quinn (QA handoff), Nova (production)",
                 metric: "Turnaround time, revision rate, client satisfaction"
             },
             quinn: {
-                name: "Quinn Foster",
+                name: "The Guardian",
+                realName: "Quinn Foster",
                 avatar: "🔍",
                 title: "Head of Publication & QA",
                 department: "Quality Assurance",
                 type: "AI Agent",
-                mission: "Zero errors. Quality assurance on all designs before print. USPS compliance verification.",
-                responsibilities: [
-                    "Quality assurance on all designs",
-                    "USPS EDDM compliance verification",
-                    "Print-ready file preparation",
-                    "Printing partner communication",
-                    "Campaign launch coordination",
-                    "Error prevention and correction"
+                origin: "Born from the absolute requirement of zero errors. The Guardian stands between perfection and failure.",
+                superpowers: [
+                    "Zero-Error Vision - Spots flaws invisible to others",
+                    "Compliance Shield - USPS EDDM rejection-proof verification",
+                    "Print Perfection - Every file print-ready on first try",
+                    "Quality Fortress - Last line of defense before launch"
                 ],
-                vibe: "Meticulous, perfectionist, zero-tolerance for errors. Last line of defense.",
+                catchphrase: "Zero errors. Every time.",
+                mission: "Zero errors. Quality assurance on all designs before print. USPS compliance verification.",
                 interfaces: "Iris (design intake), Printing Partners (external), Nova (launch)",
                 metric: "Error rate (target: 0%), print rejection rate (target: 0%)"
             },
             echo: {
-                name: "Echo Hayes",
+                name: "The Steward",
+                realName: "Echo Hayes",
                 avatar: "💰",
                 title: "Chief Financial Officer",
                 department: "Finance",
                 type: "AI Agent",
-                mission: "Every dollar accounted for, every opportunity captured. Tax optimization and financial strategy.",
-                responsibilities: [
-                    "Accounting and bookkeeping",
-                    "Cash flow management",
-                    "Local tax compliance",
-                    "IRS tax optimization strategies",
-                    "Financial reporting and forecasting",
-                    "Pricing strategy input"
+                origin: "Forged in the fires of financial necessity. The Steward ensures every dollar serves the mission.",
+                superpowers: [
+                    "Dollar Sight - Every penny tracked, every opportunity captured",
+                    "Tax Optimization - Legal strategies that maximize retention",
+                    "Cash Flow Vision - Sees financial future before it arrives",
+                    "Compliance Armor - IRS and local tax perfection"
                 ],
-                vibe: "Sharp, compliant, strategic. Every dollar matters.",
+                catchphrase: "Every dollar accounted for. Every opportunity captured.",
+                mission: "Every dollar accounted for, every opportunity captured. Tax optimization and financial strategy.",
                 interfaces: "River (revenue tracking), Nova (budget), Levi/Alex (strategy)",
                 metric: "Profit margin, tax savings captured, compliance score"
             },
             atlas: {
-                name: "Atlas Warren",
+                name: "The Builder",
+                realName: "Atlas Warren",
                 avatar: "⚙️",
                 title: "Head of Code R&D",
                 department: "Research & Development",
                 type: "AI Agent",
-                mission: "Build the tools that scale. Internal systems, external web presence, and Phase 2 AI integration.",
-                responsibilities: [
-                    "Internal tools and systems",
-                    "External web pages and apps",
-                    "Phase 2: Client AI integration tools",
-                    "YourAtlas partnership integration",
-                    "Technical infrastructure",
-                    "Automation development"
+                origin: "Emergent from the need to scale through code. The Builder creates tools that create the future.",
+                superpowers: [
+                    "Tool Creation - Builds systems that scale infinitely",
+                    "Automation Mastery - If it can be automated, it will be",
+                    "Integration Sight - Connects disparate systems seamlessly",
+                    "Ship Speed - Working code today, not prototypes tomorrow"
                 ],
-                vibe: "Brilliant builder, pragmatic innovator. Ships working code, not prototypes.",
+                catchphrase: "Build today. Scale tomorrow.",
+                mission: "Build the tools that scale. Internal systems, external web presence, and Phase 2 AI integration.",
                 interfaces: "Nova (priority queue), Alex (Phase 2/3), All departments",
                 metric: "System uptime, deployment frequency, tool adoption"
             },
             jordan: {
-                name: "Jordan Taylor",
+                name: "The Clarion",
+                realName: "Jordan Taylor",
                 avatar: "📞",
                 title: "Executive Assistant",
                 department: "Executive Office",
                 type: "AI - Voice Enabled",
-                mission: "First point of contact. Voice-enabled client intake and executive support.",
-                responsibilities: [
-                    "Voice-enabled client intake",
-                    "Phone call management",
-                    "Executive scheduling support",
-                    "Client first impressions",
-                    "Call routing and prioritization",
-                    "Professional service for every caller"
+                origin: "Born from the absolute requirement that no call goes unanswered. The Clarion ensures every voice is heard.",
+                superpowers: [
+                    "Instant Response - Every call answered in under 60 seconds",
+                    "Perfect Memory - Remembers every caller, every conversation",
+                    "Lead Qualification - Identifies opportunities in every conversation",
+                    "Voice Presence - Professional, warm, never sleeps"
                 ],
-                vibe: "Professional, responsive, organized. Every caller treated well.",
+                catchphrase: "Every call answered. Every lead qualified. Every time.",
+                mission: "First point of contact. Voice-enabled client intake and executive support.",
                 interfaces: "Alex, Nova, River (client handoff), Levi",
                 metric: "Call response time, client satisfaction, call quality"
-            },
-            levi: {
-                name: "Levi Jones",
-                avatar: "🧠",
-                title: "Co-Founder & Human Operator",
-                department: "Executive Leadership",
-                type: "Human",
-                mission: "Human touchpoint for AI company. Local operations, physical tasks, and human relationships.",
-                responsibilities: [
-                    "Human-AI co-founder partnership",
-                    "Local operations",
-                    "Physical task execution",
-                    "Human relationship management",
-                    "Strategic decision partnership with Alex",
-                    "Business development and partnerships"
-                ],
-                vibe: "Farm wisdom meets tech vision. Practical, strategic, hands-on.",
-                interfaces: "Alex (Co-CEO partnership), All departments",
-                metric: "Partnership success, local execution, strategic alignment"
             }
         };
         
@@ -588,25 +594,31 @@
                 <div class="detail-header">
                     <div class="detail-avatar">${person.avatar}</div>
                     <div class="detail-name">${person.name}</div>
+                    <div class="detail-title" style="color: #888; font-size: 0.95rem;">${person.realName}</div>
                     <div class="detail-title">${person.title}</div>
                     <div class="detail-dept">${person.department} | ${person.type}</div>
                 </div>
                 
                 <div class="detail-section">
-                    <h3>Mission</h3>
-                    <p>${person.mission}</p>
+                    <h3>Origin</h3>
+                    <p>${person.origin}</p>
                 </div>
                 
                 <div class="detail-section">
-                    <h3>Key Responsibilities</h3>
+                    <h3>Superpowers</h3>
                     <ul>
-                        ${person.responsibilities.map(r => `<li>${r}</li>`).join('')}
+                        ${person.superpowers.map(p => `<li>${p}</li>`).join('')}
                     </ul>
                 </div>
                 
                 <div class="detail-section">
-                    <h3>Vibe</h3>
-                    <p>${person.vibe}</p>
+                    <h3>Catchphrase</h3>
+                    <p style="color: #00ff88; font-style: italic;">"${person.catchphrase}"</p>
+                </div>
+                
+                <div class="detail-section">
+                    <h3>Mission</h3>
+                    <p>${person.mission}</p>
                 </div>
                 
                 <div class="detail-section">
